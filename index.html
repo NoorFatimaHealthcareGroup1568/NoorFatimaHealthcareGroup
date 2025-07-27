@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noor Fatima Healthcare Group</title>
+
+  <!-- Google Fonts & Font Awesome -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    crossorigin="anonymous"
+  />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ───────── Color Palette ───────── */
+    :root {
+      --primary: #007bff;
+      --bg:      #ffffff;
+      --text:    #222222;
+    }
+
+    /* ───────── Sticky Header ───────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--bg);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* ───────── Navbar Layout ───────── */
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+    }
+
+    /* ───────── Logo Text ───────── */
+    .logo {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--text);
+    }
+
+    /* ───────── Nav Links ───────── */
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    nav ul li {
+      margin-left: 1.5rem;
+    }
+    nav ul li a {
+      position: relative;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--text);
+      padding: 0.25rem 0;
+      transition: color 0.3s ease;
+    }
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: var(--primary);
+    }
+    nav ul li a:hover::after,
+    nav ul li a.active::after {
+      width: 100%;
+    }
+
+    /* ───────── Hamburger (Mobile) ───────── */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text);
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      nav ul {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: var(--bg);
+        flex-direction: column;
+        width: 200px;
+        padding: 1rem 0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+      }
+      nav ul.open { transform: translateX(0); }
+      nav ul li {
+        margin: 0.5rem 0;
+        text-align: right;
+        margin-right: 1rem;
+      }
+      .hamburger { display: block; }
+    }
+
+    /* ───────── Fade-In Utility ───────── */
+    .fade-in {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .fade-in.loaded {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="navbar">
+      <!-- Logo Text Only -->
+      <div class="logo" id="nav-logo">Loading…</div>
+
+      <!-- Hamburger for Mobile -->
+      <button class="hamburger" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Navigation -->
+      <nav>
+        <ul id="nav-list">
+          <li><a id="nav-home"    href="index.html" class="active">Home</a></li>
+          <li><a id="nav-buy"     href="order.html">Buy Medicines</a></li>
+          <li><a id="nav-contact" href="contact.html">Contact Us</a></li>
+          <li><a id="nav-about"   href="about.html">About Us</a></li>
+          <li><a id="nav-store"   href="store.html">Locate a Store</a></li>
+          <li><a id="nav-blog"    href="blog.html">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section class="hero fade-in" id="hero" style="display: none;"></section>
+    <section class="services fade-in" id="services" style="display: none;"></section>
+    <section class="testimonials fade-in" id="testimonials" style="display: none;">
+      <h2>What Our Customers Say</h2>
+      <div class="testimonial-slider">
+        <div class="testimonial-track" id="testimonial-track"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer fade-in" id="footer" style="display: none;">
+    <div class="footer-content">
+      <p id="footer-text"></p>
+    </div>
+  </footer>
+
+  <!-- Firebase & Dynamic Content Script -->
+  <script type="module">
+    import { db } from "./firebase-config.js";
+    import { ref, child, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const dbRef = ref(db);
+
+    // Navbar text from Firebase
+    get(child(dbRef, "navbar")).then(snap => {
+      if (!snap.exists()) return;
+      const nav = snap.val();
+      document.getElementById("nav-logo").textContent    = nav.logo;
+      document.getElementById("nav-home").textContent    = nav.links.home;
+      document.getElementById("nav-buy").textContent     = nav.links.buy;
+      document.getElementById("nav-contact").textContent = nav.links.contact;
+      document.getElementById("nav-about").textContent   = nav.links.about;
+      document.getElementById("nav-store").textContent   = nav.links.store;
+      document.getElementById("nav-blog").textContent    = nav.links.blog;
+    });
+
+    // Hero
+    get(child(dbRef, "hero")).then(snap => {
+      if (!snap.exists()) return;
+      const hero = document.getElementById("hero");
+      hero.innerHTML = snap.val().html;
+      hero.style.display = "block";
+      hero.classList.add("loaded");
+    });
+
+    // Services
+    get(child(dbRef, "services")).then(snap => {
+      if (!snap.exists()) return;
+      const sv = document.getElementById("services");
+      sv.innerHTML = snap.val().html;
+      sv.style.display = "block";
+      sv.classList.add("loaded");
+    });
+
+    // Testimonials
+    get(child(dbRef, "testimonials")).then(snap => {
+      if (!snap.exists()) return;
+      const track = document.getElementById("testimonial-track");
+      snap.val().forEach(t => {
+        const div = document.createElement("div");
+        div.className = "testimonial";
+        div.innerHTML = `<p>"${t.quote}"</p><p class="author">— ${t.author}</p>`;
+        track.appendChild(div);
+      });
+      const ts = document.getElementById("testimonials");
+      ts.style.display = "block";
+      ts.classList.add("loaded");
+    });
+
+    // Footer
+    get(child(dbRef, "footer")).then(snap => {
+      if (!snap.exists()) return;
+      document.getElementById("footer-text").textContent = snap.val().text;
+      const footer = document.getElementById("footer");
+      footer.style.display = "block";
+      footer.classList.add("loaded");
+    });
+
+    // Hamburger toggle
+    document.querySelector(".hamburger").addEventListener("click", () => {
+      document.getElementById("nav-list").classList.toggle("open");
+    });
+  </script>
+</body>
+</html>

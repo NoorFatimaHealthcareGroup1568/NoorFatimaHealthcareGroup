@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order Medicines | Noor Fatima Healthcare Group</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="navbar">
+      <div class="logo" id="nav-logo">Noor Fatima Healthcare Group</div>
+      <button class="hamburger" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav>
+        <ul id="nav-list">
+          <li><a id="nav-home" href="index.html">Home</a></li>
+          <li><a id="nav-buy" class="active" href="order.html">Buy Medicines</a></li>
+          <li><a id="nav-contact" href="contact.html">Contact Us</a></li>
+          <li><a id="nav-about" href="about.html">About Us</a></li>
+          <li><a id="nav-store" href="store.html">Locate a Store</a></li>
+          <li><a id="nav-blog" href="blog.html">Blog</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main data-aos="fade-up">
+    <section class="order-section">
+      <h1 class="mb-2">Buy Your Medicines</h1>
+      <form class="contact-grid">
+          <div class="flex-col">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="flex-col">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="flex-col">
+            <label for="medicine">Medicine</label>
+            <input type="text" id="medicine" name="medicine" required />
+          </div>
+          <div class="flex-col">
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" name="quantity" min="1" required />
+          </div>
+          <div class="flex-col span-2">
+            <label for="address">Delivery Address</label>
+            <input type="text" id="address" name="address" required />
+          </div>
+          <div class="flex-col span-2">
+            <button type="submit" class="cta-button">Place Order</button>
+          </div>
+        </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>&copy; 2025 Noor Fatima Healthcare Group. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Firebase & Hamburger -->
+  <script type="module">
+    import { db } from "./firebase-config.js";
+    import { ref, child, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    const dbRef = ref(db);
+    get(child(dbRef, "navbar")).then(snap => {
+      if (!snap.exists()) return;
+      const nav = snap.val();
+      document.getElementById("nav-logo").textContent    = nav.logo;
+      document.getElementById("nav-home").textContent    = nav.links.home;
+      document.getElementById("nav-buy").textContent     = nav.links.buy;
+      document.getElementById("nav-contact").textContent = nav.links.contact;
+      document.getElementById("nav-about").textContent   = nav.links.about;
+      document.getElementById("nav-store").textContent   = nav.links.store;
+      document.getElementById("nav-blog").textContent    = nav.links.blog;
+    });
+    document.querySelector(".hamburger").addEventListener("click", () => {
+      document.getElementById("nav-list").classList.toggle("open");
+    });
+  </script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+  </script>
+</body>
+</html>
