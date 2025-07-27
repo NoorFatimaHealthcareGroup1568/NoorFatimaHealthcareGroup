@@ -1,77 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Locate a Store | Noor Fatima Healthcare Group</title>
-
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous"/>
-
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p0N5ORDEpuyUp3dvO77a1iW8aVG2Zp2+UoFqL8mV2UzU5rEpr5i9oR+nG+SkHyGZVq1DE9JYmVYFPld6hZL4hQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { overflow-y: scroll; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f7fdfc;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background-color: #009688;
+      color: white;
+      padding: 1rem 0;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 1rem;
+    }
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    .navbar nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    .navbar nav ul li a {
+      color: white;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .hero {
+      text-align: center;
+      padding: 4rem 1rem;
+      background: linear-gradient(to right, #009688aa, #009688cc);
+      color: white;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+    .store-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-bottom: 1.5rem;
+    }
+    .store-card h3 {
+      margin-bottom: 0.5rem;
+      color: #009688;
+    }
+    .store-card p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+    .expansion-note {
+      text-align: center;
+      margin-top: 2rem;
+      font-weight: 600;
+      color: #444;
+    }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="site-header">
+  <header>
     <div class="navbar">
-      <div class="logo" id="nav-logo">Noor Fatima Healthcare Group</div>
-      <button class="hamburger" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
+      <div class="logo">Noor Fatima Healthcare Group</div>
       <nav>
-        <ul id="nav-list">
-          <li><a id="nav-home" href="index.html">Home</a></li>
-          <li><a id="nav-buy" href="order.html">Buy Medicines</a></li>
-          <li><a id="nav-contact" href="contact.html">Contact Us</a></li>
-          <li><a id="nav-about" href="about.html">About Us</a></li>
-          <li><a id="nav-store" class="active" href="store.html">Locate a Store</a></li>
-          <li><a id="nav-blog" href="blog.html">Blog</a></li>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="order.html">Buy Medicines</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="store.html">Locate a Store</a></li>
+          <li><a href="blog.html">Blog</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Main -->
-  <main>
-    <section class="store-section">
-      <!-- Your store locator content here -->
-      <h1 class="mb-2">Our Store Locations</h1>
-      <ul>
-        <li>123 Main St, City</li>
-        <li>456 Oak Ave, Town</li>
-        <!-- etc. -->
-      </ul>
-    </section>
-  </main>
+  <section class="hero">
+    <h1>Locate a Store</h1>
+    <p>Find our medical stores near you.</p>
+  </section>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="footer-content">
-      <p>&copy; 2025 Noor Fatima Healthcare Group. All rights reserved.</p>
+  <section class="section">
+    <div class="store-card" data-aos="fade-up">
+      <h3>Noor Fatima Medical Shop</h3>
+      <p><strong>Location:</strong> Chanduna Deh Nowabad</p>
+      <p><strong>Timing:</strong> Every day from 10 AM to 5 PM</p>
     </div>
-  </footer>
 
-  <!-- Firebase & Hamburger -->
-  <script type="module">
-    import { db } from "./firebase-config.js";
-    import { ref, child, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-    const dbRef = ref(db);
-    get(child(dbRef, "navbar")).then(snap => {
-      if (!snap.exists()) return;
-      const nav = snap.val();
-      document.getElementById("nav-logo").textContent    = nav.logo;
-      document.getElementById("nav-home").textContent    = nav.links.home;
-      document.getElementById("nav-buy").textContent     = nav.links.buy;
-      document.getElementById("nav-contact").textContent = nav.links.contact;
-      document.getElementById("nav-about").textContent   = nav.links.about;
-      document.getElementById("nav-store").textContent   = nav.links.store;
-      document.getElementById("nav-blog").textContent    = nav.links.blog;
-    });
-    document.querySelector(".hamburger").addEventListener("click", () => {
-      document.getElementById("nav-list").classList.toggle("open");
-    });
+    <p class="expansion-note" data-aos="fade-up" data-aos-delay="100">
+      Our network is expanding—more locations coming soon!
+    </p>
+  </section>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
   </script>
 </body>
 </html>

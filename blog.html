@@ -1,129 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Our Blog | Noor Fatima Healthcare Group</title>
-
-  <!-- Google Fonts & Font Awesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous"/>
-
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="style.css"/>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | Noor Fatima Healthcare Group</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p0N5ORDEpuyUp3dvO77a1iW8aVG2Zp2+UoFqL8mV2UzU5rEpr5i9oR+nG+SkHyGZVq1DE9JYmVYFPld6hZL4hQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   <style>
-    .blog-section {
-      padding: 4rem 1rem;
-      background: #f9f9f9;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { overflow-y: scroll; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f7fdfc;
+      color: #333;
+      line-height: 1.6;
     }
-    .blog-section h2 {
+    header {
+      background-color: #009688;
+      color: white;
+      padding: 1rem 0;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 1rem;
+    }
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    .navbar nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    .navbar nav ul li a {
+      color: white;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .hero {
       text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
+      padding: 4rem 1rem;
+      background: linear-gradient(to right, #009688aa, #009688cc);
+      color: white;
     }
-    .blog-cards {
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+    .blog-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
     }
     .blog-card {
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: transform 0.3s;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
     }
-    .blog-card:hover { transform: translateY(-5px); }
-    .blog-card img {
-      width: 100%; height: 160px; object-fit: cover;
+    .blog-card:hover {
+      transform: translateY(-5px);
     }
-    .blog-card-content {
-      padding: 1rem;
+    .blog-card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+      color: #009688;
     }
-    .blog-card-content h3 { margin: 0 0 0.5rem; font-size: 1.25rem; }
-    .blog-card-content .date {
-      font-size: 0.9rem; color: #777; margin-bottom: 0.75rem;
+    .blog-card p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
     }
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="site-header">
+  <header>
     <div class="navbar">
-      <div class="logo" id="nav-logo">Noor Fatima Healthcare Group</div>
-      <button class="hamburger" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
+      <div class="logo">Noor Fatima Healthcare Group</div>
       <nav>
-        <ul id="nav-list">
-          <li><a id="nav-home" href="index.html">Home</a></li>
-          <li><a id="nav-buy" href="order.html">Buy Medicines</a></li>
-          <li><a id="nav-contact" href="contact.html">Contact Us</a></li>
-          <li><a id="nav-about" href="about.html">About Us</a></li>
-          <li><a id="nav-store" href="store.html">Locate a Store</a></li>
-          <li><a id="nav-blog" class="active" href="blog.html">Blog</a></li>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="order.html">Buy Medicines</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="store.html">Locate a Store</a></li>
+          <li><a href="blog.html">Blog</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Blog Section -->
-  <section class="blog-section">
-    <h2>Latest from Our Blog</h2>
-    <div class="blog-cards" id="blogContainer">
-      <p>Loading posts…</p>
+  <section class="hero">
+    <h1>Our Blog</h1>
+    <p>Healthcare tips, news, and updates to keep you informed.</p>
+  </section>
+
+  <section class="section">
+    <div class="blog-grid">
+      <div class="blog-card" data-aos="fade-up">
+        <h3>5 Tips for Managing Your Daily Medicines</h3>
+        <p>Stay on top of your prescriptions with these practical tips to improve your health routine.</p>
+      </div>
+      <div class="blog-card" data-aos="fade-up" data-aos-delay="100">
+        <h3>How to Identify Genuine Medicines</h3>
+        <p>Learn how to ensure the medicines you buy are authentic and safe.</p>
+      </div>
+      <div class="blog-card" data-aos="fade-up" data-aos-delay="200">
+        <h3>Why Timely Delivery Matters in Healthcare</h3>
+        <p>Understand why quick access to medicines can make a real difference in treatment outcomes.</p>
+      </div>
     </div>
   </section>
 
-  <!-- Firebase + Dynamic Content -->
-  <script type="module">
-    import { db } from "./firebase-config.js";
-    import { ref, child, get, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-    const dbRef = ref(db);
-
-    // Navbar text
-    get(child(dbRef, "navbar")).then(snap => {
-      if (!snap.exists()) return;
-      const nav = snap.val();
-      document.getElementById("nav-logo").textContent    = nav.logo;
-      document.getElementById("nav-home").textContent    = nav.links.home;
-      document.getElementById("nav-buy").textContent     = nav.links.buy;
-      document.getElementById("nav-contact").textContent = nav.links.contact;
-      document.getElementById("nav-about").textContent   = nav.links.about;
-      document.getElementById("nav-store").textContent   = nav.links.store;
-      document.getElementById("nav-blog").textContent    = nav.links.blog;
-    });
-
-    // Blog posts
-    onValue(ref(db, "blogs"), snapshot => {
-      const container = document.getElementById("blogContainer");
-      const blogs = snapshot.val();
-      container.innerHTML = "";
-      if (!blogs) {
-        container.innerHTML = "<p>No blog posts available right now.</p>";
-        return;
-      }
-      Object.values(blogs).forEach(blog => {
-        const card = document.createElement("div");
-        card.className = "blog-card";
-        card.innerHTML = `
-          <img src="${blog.image}" alt="${blog.title}">
-          <div class="blog-card-content">
-            <h3>${blog.title}</h3>
-            <p class="date">${blog.date}</p>
-            <p>${blog.content.slice(0, 100)}…</p>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    });
-
-    // Hamburger toggle
-    document.querySelector(".hamburger").addEventListener("click", () => {
-      document.getElementById("nav-list").classList.toggle("open");
-    });
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
   </script>
 </body>
 </html>
